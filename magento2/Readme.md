@@ -28,10 +28,11 @@ https://github.com/alexcheng1982/docker-magento2
 ```
 git clone git@github.com:alexcheng1982/docker-magento2.git
 cd docker-magento2
-docker-compuse up -d
+docker-compose up -d
 docker ps
 docker exec -it dockermagento2_web_1 install-magento
 docker exec -it dockermagento2_web_1 install-sampledata
+sudo echo "127.0.0.1       local.magento" >> sudo /etc/hosts
 open http://local.magento/admin
 //login with admin/magentorocks1
 ```
