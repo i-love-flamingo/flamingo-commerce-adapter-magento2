@@ -5,7 +5,7 @@ Flamingo-commerce modules that can be used to connect to Magento2
 ## Status
 
 The community project is in very beta and a lot of features are missing.
-Currenlty its a "kickstart" - and we are searching for partners and contributors.
+Currently its a "kickstart" - and we are searching for partners and contributors.
 
 
 ### Magento 2 Module
