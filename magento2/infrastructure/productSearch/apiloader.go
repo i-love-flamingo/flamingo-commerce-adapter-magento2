@@ -1,4 +1,4 @@
-package product
+package productSearch
 
 import (
 	"flamingo.me/flamingo-commerce-adapter-magento2/magento2/infrastructure/swaggerclient/client"
@@ -14,20 +14,20 @@ import (
 )
 
 type (
-	RepositoryLoader struct {
+	ApiLoader struct {
 		client *client.MagentoCommerceForB2B
 		logger flamingo.Logger
 	}
 )
 
-func (l *RepositoryLoader) Inject(client *client.MagentoCommerceForB2B, logger flamingo.Logger) {
+func (l *ApiLoader) Inject(client *client.MagentoCommerceForB2B, logger flamingo.Logger) {
 	l.client = client
-	l.logger = logger.WithField(flamingo.LogKeyModule, "magento2").WithField(flamingo.LogKeyCategory, "RepositoryLoader")
+	l.logger = logger.WithField(flamingo.LogKeyModule, "magento2").WithField(flamingo.LogKeyCategory, "ApiLoader")
 }
 
 
 
-func (l *RepositoryLoader) Load(indexer productSearch.Index) error {
+func (l *ApiLoader) Load(indexer productSearch.Index) error {
 	l.logger.Info("Start to load products into repository..")
 	params := catalog_product_repository_v1.NewCatalogProductRepositoryV1GetListGetParams()
 	pageSize := int64(1000)
@@ -76,7 +76,7 @@ func getCustomAttributeString(list []*models.FrameworkAttributeInterface, key st
 
 
 
-func (l *RepositoryLoader) getCategoryTeaser(id int64) *domain.CategoryTeaser {
+func (l *ApiLoader) getCategoryTeaser(id int64) *domain.CategoryTeaser {
 	cparams := catalog_category_repository_v1.NewCatalogCategoryRepositoryV1GetGetParams()
 	cparams.SetTimeout(time.Second * 60)
 	cparams.CategoryID = id
