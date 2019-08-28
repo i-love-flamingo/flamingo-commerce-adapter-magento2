@@ -5,12 +5,12 @@ import (
 	"flamingo.me/flamingo-commerce-adapter-magento2/magento2/infrastructure/swaggerclient/client/catalog_product_repository_v1"
 	"flamingo.me/flamingo-commerce-adapter-magento2/magento2/infrastructure/swaggerclient/client/catalog_category_repository_v1"
 	"flamingo.me/flamingo-commerce-adapter-magento2/magento2/infrastructure/swaggerclient/models"
+	productSearchDomain "flamingo.me/flamingo-commerce-adapter-standalone/productSearch/domain"
 	priceDomain "flamingo.me/flamingo-commerce/v3/price/domain"
 	"flamingo.me/flamingo-commerce/v3/product/domain"
 	"flamingo.me/flamingo/v3/framework/flamingo"
 	"time"
 
-	"flamingo.me/flamingo-commerce-adapter-standalone/productSearch/infrastructure/productSearch"
 )
 
 type (
@@ -27,7 +27,7 @@ func (l *ApiLoader) Inject(client *client.MagentoCommerceForB2B, logger flamingo
 
 
 
-func (l *ApiLoader) Load(indexer productSearch.Index) error {
+func (l *ApiLoader) Load(indexer productSearchDomain.ProductRepository) error {
 	l.logger.Info("Start to load products into repository..")
 	params := catalog_product_repository_v1.NewCatalogProductRepositoryV1GetListGetParams()
 	pageSize := int64(1000)

@@ -6,8 +6,8 @@ import (
 	productSearchAdapter "flamingo.me/flamingo-commerce-adapter-magento2/magento2/infrastructure/productSearch"
 	"flamingo.me/flamingo-commerce-adapter-magento2/magento2/infrastructure/swaggerclient/client"
 	productSearchModule "flamingo.me/flamingo-commerce-adapter-standalone/productSearch"
+	"flamingo.me/flamingo-commerce-adapter-standalone/productSearch/domain"
 
-	"flamingo.me/flamingo-commerce-adapter-standalone/productSearch/infrastructure/productSearch"
 	"flamingo.me/flamingo/v3/framework/config"
 )
 
@@ -34,7 +34,7 @@ func (m *Module) Configure(injector *dingo.Injector) {
 // Configure  - dingo module main method
 func (m *ProductModule) Configure(injector *dingo.Injector) {
 	//Register Loader for productSearch
-	injector.Bind((*productSearch.Loader)(nil)).To(productSearchAdapter.CsvLoader{}).In(dingo.ChildSingleton)
+	injector.Bind(new(domain.Loader)).To(productSearchAdapter.CsvLoader{}).In(dingo.ChildSingleton)
 	//injector.Bind(new(cart.CustomerCartService)).To(cartadapter.CustomerCartServiceAdapter{})
 	//injector.Bind(new(domain.ProductService)).To(product.ServiceAdapter{})
 }

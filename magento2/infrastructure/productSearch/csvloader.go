@@ -2,8 +2,9 @@ package productSearch
 
 import (
 	"bufio"
+	productSearchDomain "flamingo.me/flamingo-commerce-adapter-standalone/productSearch/domain"
+
 	"encoding/csv"
-	"flamingo.me/flamingo-commerce-adapter-standalone/productSearch/infrastructure/productSearch"
 	domain2 "flamingo.me/flamingo-commerce/v3/price/domain"
 	"flamingo.me/flamingo-commerce/v3/product/domain"
 	"flamingo.me/flamingo/v3/framework/flamingo"
@@ -25,6 +26,11 @@ type (
 	}
 )
 
+
+var (
+	_ productSearchDomain.Loader = &CsvLoader{}
+)
+
 func (l *CsvLoader) Inject(logger flamingo.Logger, config *struct {
 	CsvFile string `inject:"config:flamingo-commerce-adapter-magento2.product.csvPath"`
 }) {
@@ -35,7 +41,7 @@ func (l *CsvLoader) Inject(logger flamingo.Logger, config *struct {
 	l.csvFile = config.CsvFile
 }
 
-func (l *CsvLoader) Load(indexer productSearch.Index) error {
+func (l *CsvLoader) Load(indexer productSearchDomain.ProductRepository) error {
 	l.logger.Info(fmt.Sprintf("start loading magento products frome export file: %v", l.csvFile))
 	f, err := os.Open(l.csvFile)
 	if err != nil {
