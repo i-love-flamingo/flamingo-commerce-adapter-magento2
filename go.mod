@@ -1,6 +1,6 @@
 module flamingo.me/flamingo-commerce-adapter-magento2
 
-go 1.12
+go 1.26.0
 
 replace flamingo.me/flamingo/v3 => ../flamingo
 
